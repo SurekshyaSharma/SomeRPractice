@@ -1,0 +1,108 @@
+---
+title: "Assignment 2"
+author: "Surekshya Sharma"
+date: "2/7/2020"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Assignment 1 RMarkdown Template
+
+The following command will print out your current working directory:
+
+```{r}
+getwd()
+```
+The next command will change to a given directory.  Set that directory location to where you have saved the *cdc.RData* file.
+
+```{r}
+setwd("C:/Users/surek/OneDrive/Desktop/631")
+```
+
+```{r}
+load("cdc.RData")
+```
+
+# Question 1: How many cases (i.e. observations) and how many variables (i.e. attributes/features) are there in this data set? Show the command you used in the RMarkdown file as well as the generated pdf (this should be default for multi-line chunks).
+```{r}
+dim(cdc)
+names(cdc)
+```
+
+
+# Question 2:  What type of variable is genhlth?
+```{r}
+
+```
+
+
+# Question 3: What type of variable is weight?
+```{r}
+
+```
+
+
+# Question 4: What type of variable is smoke100?
+```{r}
+
+```
+
+# Question 5: Create a numerical summary for gender. How many males are in the sample? Show the command used to answer the question in the RMarkdown and generated PDF.
+```{r}
+summary(cdc$gender)
+```
+
+# Question 6: Compute the relative frequency distribution of genhlth and show the command in RMarkdown and the generated PDF. What proportion of the sample reports being in excellent health?
+```{r}
+table(cdc$genhlth) /length(cdc$genhlth)
+```
+
+
+# Question 7: What does the mosaic plot reveal about smoking habits and gender?
+```{r}
+gender_smokers <- table(cdc$gender, cdc$smoke100)
+```
+  
+
+# Question 8: Create a new object called under23_and_smoke that contains all observations of respondents under the age of 23 that have smoked at least 100 cigarettes in their lifetime. Show the command you used to create the new object in RMarkdown . How many observations are in the subset under23_and_smoke?
+```{r}
+under23_and_smoke <- subset(cdc, age < 23 & smoke100 == 1) 
+summary(under23_and_smoke)
+dim(under23_and_smoke)
+
+```
+#Question 9: True or False: In the under23_and_smoke subset, there are more women who smoke.Show the command you used to create the new object in RMarkdown.
+```{r}
+summary(under23_and_smoke)
+```
+# Question 10: Which of the following is false based on the box plot of BMI vs. general health?
+# (a) The median BMI is roughly 25 for all general health categories, and there is a slight increasein median BMI as general health status declines (from excellent to poor).
+# (b) The IQR increases slightly as general health status declines (from excellent to poor).
+# (c) Among people with excellent health, there are some with unusually low BMIs comparedto the rest of the group.
+# (d) The distributions of BMIs within each health status group is left skewed.
+```{r}
+bmi <- (cdc$weight/cdc$height^2) * 703
+boxplot(bmi ~ cdc$genhlth)
+
+```
+# Question 11: Pick another categorical variable from the data set and see how it relates to BMI. List the variable you chose, why you might think it would have a relationship to BMI, show the command to generate the boxplot, and indicate what the figure seems to suggest.
+```{r}
+boxplot(bmi ~ cdc$age)
+boxplot(bmi ~ cdc$gender)
+```
+# Question 12: In the last assignment, when exploring how percentages of boys and girls born vary over time (two numerical variables) we used a scatterplot. Using the same tools (the plot function) make a scatterplot of weight versus desired weight and show the command you used. Based on the plot you made, which of the following is true about the relationship between weight and desired weight?
+# (a) moderately weak negative linear
+# (b) moderately weak positive linear
+# (c) moderately strong positive linear
+# (d) moderately weak negative linear
+```{r}
+plot(cdc$weight,cdc$wtdesire, xlab="Weight", ylab= "Desired Weight")
+```
+
+
+

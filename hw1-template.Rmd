@@ -1,0 +1,89 @@
+---
+title: "Assignment 1"
+author: "Abe Kazemzadeh"
+date: "2/7/2020"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Assignment 1 RMarkdown Template
+
+The following command will print out your current working directory:
+
+```{r}
+getwd()
+```
+The next command will change to a given directory.  Set that directory location to where you have saved the *present.RData* file.
+
+```{r}
+setwd("C:/Users/surek/OneDrive/Desktop/631")
+```
+
+```{r}
+load("present.RData")
+ plot(x = present$year, y = present$girls)
+```
+
+# Question 1: How many variables are included in this dataset?
+```{r}
+dim(present)
+names(present)
+```
+
+
+# Question 2: What years are included in this dataset?
+```{r}
+ present
+```
+
+
+# Question 3: What command would you use to view just the counts of girls born each year?
+```{r}
+present$girls
+```
+
+
+# Question 4: Is there an apparent trend in the number of girls born over the years? How would you describe it?
+```{r}
+plot(x = present$year, y = present$girls, type = "l")
+```
+
+# Question 5: Check out the help file of which.max() function, and find out in what year did we see the most total number of births in the U.S.?
+```{r}
+x <- c(present$boys)
+which.max(x)
+
+x <- c(present$girls)
+which.max(x)
+present[22,1]
+```
+
+# Question 6: Now, make a plot of the proportion of boys over time, and based on the plot determine if the following statement is true or false: The proportion of boys born in the US has decreased over time.
+```{r}
+plot(x = present$year, y = present$boys)
+```
+
+
+# Question 7: How many TRUE did you see after typing the previous expression?
+```{r}
+present$boys > present$girls
+```
+
+
+# Question 8 [MULTIPLE CHOICE]: Make a plot that displays the boy-to-girl ratio for every year in the data set. What do you see?
+plot(x = present$year, 
++      present$boys/present$girls
++ )
+
+# Question 9: Calculate absolute differences between number of boys and girls born in each year, and determine which year out of the present data had the biggest absolute difference in the number of girls and number of boys born?
+```{r}
+x <- c(present$boys - present$girls)
+which.max(x)
+present[24,1]
+
+```
